@@ -1,11 +1,11 @@
 import { Question } from "@/types/Question";
+import StarsQuestion from "../components/Questions/Stars";
 
 export default function RenderQuestions(questions: Question[]) {
   return questions.map((question) => {
     switch (question.typeQuestion) {
       case 1:
-        // pergunta de estrela
-        break;
+        return <StarsQuestion {...question} />;
       case 2:
         // ergunta de rádio
         break;

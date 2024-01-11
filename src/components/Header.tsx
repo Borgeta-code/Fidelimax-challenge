@@ -11,7 +11,7 @@ export default function Header() {
       </div>
 
       <div className="flex justify-center items-center gap-4">
-        <div className="flex justify-center items-center w-10 h-10 bg-[#333E4F] rounded-full">
+        <div className="flex justify-center items-center w-10 h-10 bg-tertiary rounded-full">
           F
         </div>
         <span className="text-sm">Fábio C. Pinto</span>
