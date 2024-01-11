@@ -5,7 +5,7 @@ export default function Header() {
     <header className="flex w-screen h-20 py-2 px-8 items-center justify-between bg-primary">
       <div className="flex justify-center items-center gap-6">
         <Menu />
-        <span className="flex uppercase font-light text-2xl gap-2">
+        <span className="flex uppercase font-light text-2xl gap-1">
           Sua <p className="font-extrabold text-secondary">Logo</p>
         </span>
       </div>
