@@ -34,7 +34,7 @@ export default function Form() {
         <h1 className="text-4xl font-semibold text-white">
           Pesquisa de satisfação
         </h1>
-        <form className="flex flex-col w-full bg-white rounded-2xl p-8">
+        <form className="flex flex-col bg-white rounded-2xl p-8 gap-14">
           {RenderQuestions(questions)}
         </form>
       </div>

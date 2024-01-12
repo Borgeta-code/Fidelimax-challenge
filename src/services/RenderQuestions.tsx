@@ -1,3 +1,5 @@
+import RadioQuestion from "@/components/Questions/Radio";
+import TextQuestion from "@/components/Questions/Text";
 import { Question } from "@/types/Question";
 import StarsQuestion from "../components/Questions/Stars";
 
@@ -7,11 +9,9 @@ export default function RenderQuestions(questions: Question[]) {
       case 1:
         return <StarsQuestion {...question} />;
       case 2:
-        // ergunta de rádio
-        break;
+        return <RadioQuestion {...question} />;
       case 3:
-        // pergunta de texto
-        break;
+        return <TextQuestion {...question} />;
       case 4:
         // seleção única (select)
         break;
