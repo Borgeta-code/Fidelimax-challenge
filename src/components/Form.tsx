@@ -12,11 +12,10 @@ import Modal from "./Modal";
 export default function Form() {
   const [questions, setQuestions] = useState<Question[]>([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Busca as perguntas
   useEffect(() => {
-    setIsLoading(true);
     axios
       .get(
         "https://fdlmx-backgrounds.sfo3.digitaloceanspaces.com/front-test/survey.json"
@@ -88,11 +87,24 @@ export default function Form() {
           Pesquisa de satisfação
         </h1>
         <form className="flex flex-col bg-white rounded-2xl p-8 gap-14">
-          {RenderQuestions(questions)}
-          <div className="flex items-center justify-between w-full">
-            <Button message="Enviar Erro" handleClick={handleSendError} />
-            <Button message="Enviar Sucesso" handleClick={handleSendSuccess} />
-          </div>
+          {isLoading ? (
+            <div className="card">
+              <div className="card__skeleton card__title"></div>
+              <div className="card__skeleton card__description"></div>
+            </div>
+          ) : (
+            <>
+              {RenderQuestions(questions)}
+              <div className="flex items-center justify-between w-full">
+                <Button message="Enviar Fake Post" handleClick={() => {}} />
+                <Button message="Enviar Erro" handleClick={handleSendError} />
+                <Button
+                  message="Enviar Sucesso"
+                  handleClick={handleSendSuccess}
+                />
+              </div>
+            </>
+          )}
         </form>
       </div>
     </main>
