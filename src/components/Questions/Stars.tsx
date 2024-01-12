@@ -13,7 +13,7 @@ export default function StarsQuestion({ answerValue, content }: Question) {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-quaternary text-3xl font-bold">
+      <h2 className="text-quaternary text-2xl font-bold">
         Título da pergunta deve ficar aqui
       </h2>
       <h3 className="text-tertiary text-base">{content}</h3>
@@ -22,14 +22,14 @@ export default function StarsQuestion({ answerValue, content }: Question) {
           return (
             <li
               key={i}
-              className="cursor-pointer transition-transform hover:scale-110 "
+              className="cursor-pointer transition-transform hover:scale-110"
               onClick={() => handleChoice(elm)}
             >
               <Image
                 src={i >= (value ? Number(value) : 0) ? GrayStar : GoldStar}
                 width={45}
                 height={45}
-                alt="Picture of the star"
+                alt="Star"
               />
             </li>
           );
