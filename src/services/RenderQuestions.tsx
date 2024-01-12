@@ -1,4 +1,5 @@
 import RadioQuestion from "@/components/Questions/Radio";
+import SelectQuestion from "@/components/Questions/Select";
 import TextQuestion from "@/components/Questions/Text";
 import UniqueRadioQuestion from "@/components/Questions/UniqueRadio";
 import { Question } from "@/types/Question";
@@ -14,8 +15,7 @@ export default function RenderQuestions(questions: Question[]) {
       case 3:
         return <TextQuestion {...question} />;
       case 4:
-        // seleção única (select)
-        break;
+        return <SelectQuestion {...question} />;
       case 5:
         return <UniqueRadioQuestion {...question} />;
       case 6:

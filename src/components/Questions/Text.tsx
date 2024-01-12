@@ -20,7 +20,7 @@ export default function TextQuestion({
         placeholder="Digite aqui..."
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="border border-tertiary/40 rounded-lg py-2 px-4 resize-none text-tertiary"
+        className="h-28 border border-tertiary/40 rounded-lg py-2 px-4 resize-none text-tertiary"
       />
     </div>
   );
