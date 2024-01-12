@@ -19,6 +19,7 @@ export default function RadioQuestion({ answerValue, content }: Question) {
                 id={`radio${elm}`}
                 name="radio"
                 value={elm}
+                checked={value === elm}
                 onChange={() => setValue(elm)}
               />
               <label className="text-tertiary" htmlFor={`radio${elm}`}>
