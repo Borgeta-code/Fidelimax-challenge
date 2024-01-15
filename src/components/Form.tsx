@@ -112,7 +112,7 @@ export default function Form() {
           ) : (
             <>
               {RenderQuestions(questions)}
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
+              <div className="flex flex-col gap-4 items-center justify-between w-full">
                 <Button
                   message="Enviar Fake Post"
                   handleClick={(event: React.MouseEvent<HTMLButtonElement>) =>

@@ -26,6 +26,7 @@ export default function MultipleQuestion({
         <div className="flex gap-3 flex-wrap">
           {itens?.map((item) => (
             <div
+              key={item.value}
               onClick={() =>
                 handleChange({ target: { value: item.value } } as any)
               }

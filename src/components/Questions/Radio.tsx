@@ -13,7 +13,10 @@ export default function RadioQuestion({ answerValue, content }: Question) {
       <div className="flex items-center">
         {Array.from({ length: 10 }, (_, i) => i + 1).map((elm, i) => {
           return (
-            <div className="flex flex-col w-full gap-2 items-center justify-between">
+            <div
+              className="flex flex-col w-full gap-2 items-center justify-between"
+              key={i}
+            >
               <input
                 type="radio"
                 id={`radio${elm}`}
