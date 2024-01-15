@@ -12,7 +12,7 @@ export default function TextQuestion({
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <h3 className="flex gap-2 text-tertiary text-base font-medium">
+      <h3 className="flex gap-2 text-tertiary text-sm md:text-base font-medium">
         {content}
         {mandatory == false && <p className="text-tertiary/70">(Opcional)</p>}
       </h3>

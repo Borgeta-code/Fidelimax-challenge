@@ -1,5 +1,6 @@
 "use client";
 
+import { FakePost } from "@/services/FakePost";
 import RenderQuestions from "@/services/RenderQuestions";
 import { SendError } from "@/services/SendError";
 import { SendSuccess } from "@/services/SendSuccess";
@@ -35,7 +36,9 @@ export default function Form() {
   const [isModalErroOpen, setIsModalErroOpen] = useState(false);
   const [ErrorResponse, setErrorResponse] = useState("");
 
-  const handleSendError = async () => {
+  const handleSendError = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     try {
       const result = await SendError(event);
       setErrorResponse(result.error);
@@ -47,12 +50,26 @@ export default function Form() {
 
   // Modal Sucesso
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
-  const SuccessResponse = "Sucesso ao enviar formulário!";
+  const SuccessResponse = "Sucesso ao enviar formulário";
 
-  const handleSendSuccess = async () => {
+  const handleSendSuccess = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     try {
       await SendSuccess(event);
       setIsModalSuccessOpen(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Fake post
+  const handleFakePost = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      const result = await FakePost(event);
+      if (result.status === 201) {
+        setIsModalSuccessOpen(true);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -77,13 +94,13 @@ export default function Form() {
       )}
 
       <div className="w-full h-60 bg-primary">
-        <span className="absolute left-20 text-sm font-normal text-white/50">
+        <span className="absolute left-6 md:left-20 text-sm font-normal text-white/50">
           Pesquisa de satisfação
         </span>
       </div>
 
-      <div className="flex flex-col w-1/3 -mt-48 gap-6 py-4">
-        <h1 className="text-4xl font-semibold text-white">
+      <div className="flex flex-col w-full md:w-1/3 -mt-48 gap-6 p-6 md:p-0 md:mb-4">
+        <h1 className="text-2xl md:text-4xl font-semibold text-white">
           Pesquisa de satisfação
         </h1>
         <form className="flex flex-col bg-white rounded-2xl p-8 gap-14">
@@ -95,12 +112,24 @@ export default function Form() {
           ) : (
             <>
               {RenderQuestions(questions)}
-              <div className="flex items-center justify-between w-full">
-                <Button message="Enviar Fake Post" handleClick={() => {}} />
-                <Button message="Enviar Erro" handleClick={handleSendError} />
+              <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
+                <Button
+                  message="Enviar Fake Post"
+                  handleClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                    handleFakePost(event)
+                  }
+                />
+                <Button
+                  message="Enviar Erro"
+                  handleClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                    handleSendError(event)
+                  }
+                />
                 <Button
                   message="Enviar Sucesso"
-                  handleClick={handleSendSuccess}
+                  handleClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                    handleSendSuccess(event)
+                  }
                 />
               </div>
             </>

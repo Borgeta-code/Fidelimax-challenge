@@ -6,10 +6,10 @@ export default function RadioQuestion({ answerValue, content }: Question) {
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-quaternary text-2xl font-bold">
+      <h2 className="text-quaternary text-xl md:text-2xl font-bold">
         Título da pergunta deve ficar aqui
       </h2>
-      <h3 className="text-tertiary text-base">{content}</h3>
+      <h3 className="text-tertiary text-sm md:text-base">{content}</h3>
       <div className="flex items-center">
         {Array.from({ length: 10 }, (_, i) => i + 1).map((elm, i) => {
           return (

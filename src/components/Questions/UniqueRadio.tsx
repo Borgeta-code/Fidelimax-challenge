@@ -14,7 +14,9 @@ export default function UniqueRadioQuestion({
 
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-tertiary text-base font-medium">{content}</h3>
+      <h3 className="text-tertiary text-sm md:text-base font-medium">
+        {content}
+      </h3>
       <div className="flex items-center text-tertiary gap-4">
         {itens?.map((item) => (
           <label className="flex gap-2" key={item.value}>

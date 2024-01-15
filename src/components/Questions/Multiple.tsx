@@ -19,17 +19,17 @@ export default function MultipleQuestion({
   };
 
   return (
-    <div className="flex flex-col gap-3 w-full text-tertiary">
+    <div className="flex flex-col gap-3 w-full text-tertiary text-sm md:text-base">
       <span className="font-medium">{content}</span>
 
       {horizontal ? (
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           {itens?.map((item) => (
             <div
               onClick={() =>
                 handleChange({ target: { value: item.value } } as any)
               }
-              className={`flex justify-center items-center py-1 px-4 text-tertiary rounded-full cursor-pointer ${
+              className={`flex justify-center items-center py-1 px-4 text-tertiary rounded-full cursor-pointer text-nowrap ${
                 selectedValues.includes(item.value)
                   ? "border bg-tertiary/40 text-white shadow-sm"
                   : "border border-tertiary/30"

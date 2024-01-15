@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const SendError = async (event: any) => {
+export const SendError = async (event: React.MouseEvent<HTMLButtonElement>) => {
   event.preventDefault();
   try {
     const response = await axios.get(
