@@ -51,7 +51,6 @@ http://localhost:300
 
 - [Nextjs](https://nextjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
-- [Styled-Components](https://styled-components.com/)
 
 ## ✒️ Autores
 
