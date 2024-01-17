@@ -1,15 +1,30 @@
+import { AnswerContext } from "@/context/Answers";
 import { Question } from "@/types/Question";
-import { useState } from "react";
+import { AlertCircle } from "lucide-react";
+import { useContext, useEffect, useState } from "react";
 
 export default function MultipleQuestion({
   answerValue,
   content,
   horizontal,
   itens,
+  mandatory,
 }: Question) {
   const [selectedValues, setSelectedValues] = useState(
-    Array.isArray(answerValue) ? answerValue : [answerValue]
+    Array.isArray(answerValue) ? answerValue.map(Number) : []
   );
+
+  const [answered, setAnswered] = useState<boolean>(false);
+
+  const { answers, setAnswers } = useContext(AnswerContext)!;
+
+  useEffect(() => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [content]: selectedValues.toString(),
+    }));
+    setAnswered(selectedValues.length > 0);
+  }, [selectedValues, content, setAnswers]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
@@ -20,6 +35,13 @@ export default function MultipleQuestion({
 
   return (
     <div className="flex flex-col gap-3 w-full text-tertiary text-sm md:text-base">
+      {mandatory && !answered && (
+        <div className="flex items-center gap-2 text-red-400 mb-2">
+          <AlertCircle />
+          <p className="text-sm font-medium">Esta pergunta é obrigatória.</p>
+        </div>
+      )}
+
       <span className="font-medium">{content}</span>
 
       {horizontal ? (
@@ -32,7 +54,7 @@ export default function MultipleQuestion({
               }
               className={`flex justify-center items-center py-1 px-4 text-tertiary rounded-full cursor-pointer text-nowrap ${
                 selectedValues.includes(item.value)
-                  ? "border bg-tertiary/40 text-white shadow-sm"
+                  ? "border bg-tertiary/50 text-white shadow-sm"
                   : "border border-tertiary/30"
               }`}
             >

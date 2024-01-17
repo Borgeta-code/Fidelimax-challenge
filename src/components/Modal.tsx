@@ -1,4 +1,4 @@
-import { XIcon } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 
 interface ItemProps {
   message: String;
@@ -9,25 +9,37 @@ interface ItemProps {
 export default function Modal(props: ItemProps) {
   return (
     <div className="fixed top-0 left-0 z-10 bg-black/70 h-screen w-full flex justify-center items-center">
-      <div className="w-max bg-white rounded-md flex flex-col items-center pointer-events-auto p-4">
-        <div className="flex justify-between items-center w-full pb-2">
-          {props.type == "error" ? (
-            <p className="text-red-600 text-xl font-medium">Erro</p>
-          ) : (
-            <p className="text-green-500 text-xl font-medium">Sucesso</p>
-          )}
+      <div className="w-max bg-white rounded-md flex flex-col items-center pointer-events-auto p-4 relative overflow-hidden">
+        {props.type == "error" ? (
+          <div className="flex flex-col gap-4 p-2 justify-center items-center">
+            <XCircle className="text-red-500 w-28 h-28" />
+            <h2 className="text-red-500 font-medium text-2xl">Erro</h2>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4 p-2 justify-center items-center">
+            <CheckCircle className="text-green-500 w-28 h-28" />
+            <h2 className="text-green-500 font-medium text-2xl">Sucesso</h2>
+          </div>
+        )}
 
-          <XIcon
-            className="w-6 h-6 cursor-pointer text-red-600 hover:text-red-400"
-            onClick={props.onClose}
-          />
-        </div>
-
-        <div className="bg-tertiary/20 w-full h-[2px]" />
-
-        <div className="flex justify-center items-center w-full py-4 gap-4 text-tertiary font-medium">
+        <div className="flex justify-center items-center w-full py-4 gap-4 text-tertiary font-medium mb-6">
           {props.message}
         </div>
+
+        <button
+          className={`
+        text-white transition-colors px-4 py-1 absolute bottom-0 w-full
+        ${
+          props.type == "error"
+            ? `bg-red-500 hover:bg-red-400`
+            : "bg-green-500 hover:bg-green-400"
+        }
+       
+    `}
+          onClick={props.onClose}
+        >
+          Continuar
+        </button>
       </div>
     </div>
   );

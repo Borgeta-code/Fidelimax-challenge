@@ -1,12 +1,14 @@
 "use client";
 
+import { AnswerContext } from "@/context/Answers";
 import { FakePost } from "@/services/FakePost";
 import RenderQuestions from "@/services/RenderQuestions";
 import { SendError } from "@/services/SendError";
 import { SendSuccess } from "@/services/SendSuccess";
 import { Question } from "@/types/Question";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "./Button";
 import Modal from "./Modal";
 
@@ -31,6 +33,9 @@ export default function Form() {
         setIsLoading(false);
       });
   }, []);
+
+  // Respostas context
+  const { answers, setAnswers } = useContext(AnswerContext)!;
 
   // Modal Erro
   const [isModalErroOpen, setIsModalErroOpen] = useState(false);
@@ -65,8 +70,31 @@ export default function Form() {
 
   // Fake post
   const handleFakePost = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const mandatoryQuestions = questions.filter(
+      (question) => question.mandatory
+    );
+
+    const unansweredMandatory = mandatoryQuestions.some(
+      (question) => !answers[question.content]
+    );
+
+    if (unansweredMandatory) {
+      return toast.error("Preencha todos os dados!", {
+        style: {
+          background: "#B30000",
+          color: "#f7f7f7",
+        },
+        iconTheme: {
+          primary: "#ffff",
+          secondary: "#B30000",
+        },
+      });
+    }
+
     try {
-      const result = await FakePost(event);
+      const result = await FakePost(event, answers);
       if (result.status === 201) {
         setIsModalSuccessOpen(true);
       }
@@ -77,6 +105,8 @@ export default function Form() {
 
   return (
     <main className="flex w-screen h-full flex-col items-center justify-center">
+      <Toaster position="top-center" />
+
       {isModalErroOpen && (
         <Modal
           type={"error"}

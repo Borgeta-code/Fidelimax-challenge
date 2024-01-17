@@ -1,13 +1,27 @@
+import { AnswerContext } from "@/context/Answers";
 import { Question } from "@/types/Question";
-import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { AlertCircle, ChevronDown } from "lucide-react";
+import { useContext, useEffect, useState } from "react";
 
 export default function SelectQuestion({
   answerValue,
   content,
   itens,
+  mandatory,
 }: Question) {
   const [selectedValue, setSelectedValue] = useState(answerValue);
+
+  const [answered, setAnswered] = useState<boolean>(false);
+
+  const { answers, setAnswers } = useContext(AnswerContext)!;
+
+  useEffect(() => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [content]: selectedValue !== undefined ? selectedValue.toString() : "",
+    }));
+    setAnswered(selectedValue !== undefined);
+  }, [selectedValue, content, setAnswers]);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedValue(Number(event.target.value));
@@ -15,6 +29,12 @@ export default function SelectQuestion({
 
   return (
     <div className="flex flex-col gap-4 w-full">
+      {mandatory && !answered && (
+        <div className="flex items-center gap-2 text-red-400 mb-2">
+          <AlertCircle />
+          <p className="text-sm font-medium">Esta pergunta é obrigatória.</p>
+        </div>
+      )}
       <label className="relative">
         <select
           value={selectedValue}

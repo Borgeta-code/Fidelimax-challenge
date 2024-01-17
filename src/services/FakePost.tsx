@@ -1,10 +1,14 @@
 import axios from "axios";
 
-export const FakePost = async (event: React.MouseEvent<HTMLButtonElement>) => {
+export const FakePost = async (
+  event: React.MouseEvent<HTMLButtonElement>,
+  answers: { [key: string]: string }
+) => {
   event.preventDefault();
   try {
     const response = await axios.post(
-      "https://jsonplaceholder.typicode.com/posts/"
+      "https://jsonplaceholder.typicode.com/posts/",
+      answers
     );
     return response;
   } catch (error) {
